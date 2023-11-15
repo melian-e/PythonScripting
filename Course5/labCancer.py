@@ -1,6 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pickle
 
 #create a dataframe from the iris_2 csv file
 df = pd.read_csv('Breast_cancer_data.csv')
@@ -28,3 +29,24 @@ print(df[['radius_worst', 'compactness_worst']].corrwith(df['diagnosis'],method=
 
 # d. Given all the correlation measures, is predicting the dependent variable given these two features a good idea? Justify.
 
+print("It seems like a good idea because the is high and similar")
+
+# 3 List the data preprocessing steps that should be made, by explaining and justifying each step.
+
+print("Verify if there are any missing values")
+print("Verify if there are any categorical variables")
+print("Feature Scaling")
+print("Allow for values to be easily comparable")
+
+# 4 Write in python the code that performs data preprocessing.
+
+print(df.isnull().values.any())
+df = df.dropna()
+df = df.drop(['Unnamed: 32'], axis=1)
+df['diagnosis']=df['diagnosis'].astype('category').cat.codes
+df.dropna("columns")
+
+print(df.dtypes)
+print(df.isnull().values.any())
+
+# 5 Build the logistic regression model (using scikit-learn) and save it.
